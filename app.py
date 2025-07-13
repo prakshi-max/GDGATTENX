@@ -5,15 +5,11 @@ import warnings
 # Suppress Firestore warnings
 warnings.filterwarnings("ignore", message="Detected filter using positional arguments")
 
-# Try to load secrets from secrets.json if env vars are not set
-if not os.environ.get('GOOGLE_CLIENT_ID') or not os.environ.get('GOOGLE_CLIENT_SECRET'):
-    try:
-        with open('secrets.json') as f:
-            secrets = json.load(f)
-            os.environ['GOOGLE_CLIENT_ID'] = secrets['GOOGLE_CLIENT_ID']
-            os.environ['GOOGLE_CLIENT_SECRET'] = secrets['GOOGLE_CLIENT_SECRET']
-    except Exception as e:
-        print('Could not load secrets.json:', e)
+# Google OAuth2 setup
+CLIENT_ID = st.secrets["google_oauth"]["client_id"]
+CLIENT_SECRET = st.secrets["google_oauth"]["client_secret"]
+REDIRECT_URI = 'http://localhost:8501'
+SCOPE = 'openid email profile'
 
 from dotenv import load_dotenv
 load_dotenv('config.env')
@@ -34,12 +30,6 @@ ADMIN_EMAILS = [
     'prakshigoel59@gmail.com',  # Add your admin emails here
     # 'anotheradmin@example.com',
 ]
-
-# Google OAuth2 setup
-CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID', 'YOUR_GOOGLE_CLIENT_ID')
-CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET', 'YOUR_GOOGLE_CLIENT_SECRET')
-REDIRECT_URI = 'http://localhost:8501'
-SCOPE = 'openid email profile'
 
 oauth2 = OAuth2Component(
     client_id=CLIENT_ID,
