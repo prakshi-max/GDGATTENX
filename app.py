@@ -1,6 +1,7 @@
 import json
 import os
 import warnings
+import streamlit as st
 
 # Suppress Firestore warnings
 warnings.filterwarnings("ignore", message="Detected filter using positional arguments")
@@ -13,7 +14,6 @@ SCOPE = 'openid email profile'
 
 from dotenv import load_dotenv
 load_dotenv('config.env')
-import streamlit as st
 from firebase_admin_init import db
 from datetime import datetime
 import cv2
