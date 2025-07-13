@@ -9,7 +9,7 @@ warnings.filterwarnings("ignore", message="Detected filter using positional argu
 # Google OAuth2 setup
 CLIENT_ID = st.secrets["google_oauth"]["client_id"]
 CLIENT_SECRET = st.secrets["google_oauth"]["client_secret"]
-REDIRECT_URI = 'http://localhost:8501'
+REDIRECT_URI = 'https://gdgattenx-ndtstcldaclx7pffkpymgp.streamlit.app/'
 SCOPE = 'openid email profile'
 
 from dotenv import load_dotenv
