@@ -54,10 +54,20 @@ The GDG Attendance Tracker is a modern web application that streamlines event at
 
 ## 🔧 Configuration
 
-### Environment Variables
+### Secrets / Environment Variables
 - `GOOGLE_CLIENT_ID`: Google OAuth client ID
 - `GOOGLE_CLIENT_SECRET`: Google OAuth client secret
-- Firebase service account key
+- `FIREBASE_SERVICE_ACCOUNT_JSON`: Firebase service account JSON
+
+### Streamlit secrets example
+Create `.streamlit/secrets.toml` with:
+```toml
+[google_oauth]
+client_id = "your_google_client_id_here"
+client_secret = "your_google_client_secret_here"
+```
+
+You can also set the same values via environment variables.
 
 ### Firebase Setup
 1. Create a Firebase project

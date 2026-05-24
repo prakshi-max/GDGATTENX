@@ -41,7 +41,13 @@
 
 2. **Add Google OAuth Credentials**
    - Add your Google OAuth client ID and secret
-   - Format as TOML or use environment variables
+   - Use Streamlit secrets or environment variables
+   - Example TOML:
+     ```toml
+     [google_oauth]
+     client_id = "YOUR_GOOGLE_CLIENT_ID"
+     client_secret = "YOUR_GOOGLE_CLIENT_SECRET"
+     ```
 
 ### Step 4: Update OAuth Redirect URI
 

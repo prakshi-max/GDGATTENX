@@ -1,4 +1,5 @@
 serviceAccountkey.json
 secrets.json
 __pycache__/
-*.pyc 
+*.pyc .streamlit/secrets.toml
+your-firebase-key.json

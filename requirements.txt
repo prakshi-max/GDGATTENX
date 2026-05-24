@@ -1,6 +1,6 @@
 streamlit
 firebase-admin
-opencv-python
+opencv-python-headless
 qrcode[pil]
 streamlit-oauth
 python-dotenv 

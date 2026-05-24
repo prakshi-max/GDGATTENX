@@ -6,9 +6,32 @@ import streamlit as st
 # Suppress Firestore warnings
 warnings.filterwarnings("ignore", message="Detected filter using positional arguments")
 
-# Google OAuth2 setup
-CLIENT_ID = st.secrets["google_oauth"]["client_id"]
-CLIENT_SECRET = st.secrets["google_oauth"]["client_secret"]
+# Secret helpers
+def get_streamlit_secret(keys, env_var=None):
+    try:
+        secret_value = st.secrets
+        for key in keys:
+            secret_value = secret_value[key]
+        if secret_value:
+            return secret_value
+    except Exception:
+        pass
+    if env_var:
+        return os.getenv(env_var)
+    return None
+
+CLIENT_ID = get_streamlit_secret(["google_oauth", "client_id"], "GOOGLE_CLIENT_ID")
+CLIENT_SECRET = get_streamlit_secret(["google_oauth", "client_secret"], "GOOGLE_CLIENT_SECRET")
+CLIENT_ID = CLIENT_ID or get_streamlit_secret(["GOOGLE_CLIENT_ID"])
+CLIENT_SECRET = CLIENT_SECRET or get_streamlit_secret(["GOOGLE_CLIENT_SECRET"])
+
+if not CLIENT_ID or not CLIENT_SECRET:
+    st.error(
+        "Google OAuth credentials are missing. Create `.streamlit/secrets.toml` or set the environment variables "
+        "`GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`."
+    )
+    st.stop()
+
 REDIRECT_URI = 'https://gdgattenx-ndtstcldaclx7pffkpymgp.streamlit.app/'
 SCOPE = 'openid email profile'
 
